@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoVault — Car Duplicate & Workshop Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">Auto<span>Vault</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#stats">Why Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://wa.me/60195780301" target="_blank" class="nav-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">🇲🇾 Malaysia's Trusted Auto Specialist</div>
+      <h1 class="hero-title">Drive Smarter.<br><span>Unlock Convenience.</span></h1>
+      <p class="hero-sub">Your trusted specialist for car key duplication, access card copying, and gate remote duplication — fast, affordable, and reliable.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Book a Service</a>
+        <a href="#services" class="btn-outline">Our Services</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><span class="trust-dot"></span>Licensed & Certified</div>
+        <div class="trust-item"><span class="trust-dot"></span>10+ Years Experience</div>
+        <div class="trust-item"><span class="trust-dot"></span>500+ Happy Clients</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="morph-glow" id="morphGlow"></div>
+      <div class="car-3d" id="morphStage">
+        <!-- Car SVG — original -->
+        <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" class="car-svg" id="carSVG">
+          <defs>
+            <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#4f8ef7"/>
+              <stop offset="50%" style="stop-color:#6c63ff"/>
+              <stop offset="100%" style="stop-color:#a855f7"/>
+            </linearGradient>
+            <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#7c9fff"/>
+              <stop offset="100%" style="stop-color:#b39dff"/>
+            </linearGradient>
+            <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#c7d9ff;stop-opacity:0.9"/>
+              <stop offset="100%" style="stop-color:#e8f0ff;stop-opacity:0.6"/>
+            </linearGradient>
+            <filter id="carShadow">
+              <feDropShadow dx="0" dy="20" stdDeviation="15" flood-color="#6c63ff" flood-opacity="0.4"/>
+            </filter>
+            <radialGradient id="wheelGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" style="stop-color:#8899bb"/>
+              <stop offset="100%" style="stop-color:#223"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="300" cy="268" rx="200" ry="18" fill="#6c63ff" opacity="0.18"/>
+          <path d="M60 200 Q60 170 90 165 L170 140 Q220 100 300 95 Q380 90 430 140 L510 165 Q540 170 540 200 L540 230 Q540 245 525 245 L75 245 Q60 245 60 230 Z" fill="url(#bodyGrad)" filter="url(#carShadow)"/>
+          <path d="M175 165 Q195 115 250 105 Q300 95 350 105 Q405 115 425 165 Z" fill="url(#roofGrad)" opacity="0.95"/>
+          <path d="M355 165 Q385 130 415 155 L425 165 Z" fill="url(#glassGrad)"/>
+          <path d="M175 165 Q185 135 215 118 L250 108 Q230 125 195 160 Z" fill="url(#glassGrad)"/>
+          <path d="M255 110 Q300 97 348 110 L340 160 L260 160 Z" fill="url(#glassGrad)"/>
+          <path d="M130 190 Q300 175 470 185" stroke="white" stroke-width="3" fill="none" opacity="0.3" stroke-linecap="round"/>
+          <path d="M510 195 Q535 195 540 210 L540 230 Q535 240 520 242 L500 242 L500 195 Z" fill="#3a6fd8" opacity="0.7"/>
+          <rect x="505" y="205" width="28" height="5" rx="2" fill="#1a3a6a" opacity="0.6"/>
+          <rect x="505" y="215" width="28" height="5" rx="2" fill="#1a3a6a" opacity="0.6"/>
+          <ellipse cx="530" cy="195" rx="12" ry="7" fill="#fff" opacity="0.9"/>
+          <ellipse cx="530" cy="195" rx="8" ry="4" fill="#c8d8ff" opacity="0.8"/>
+          <rect x="68" y="193" width="20" height="10" rx="3" fill="#ff4466" opacity="0.85"/>
+          <line x1="320" y1="165" x2="325" y2="243" stroke="white" stroke-width="1.5" opacity="0.25"/>
+          <line x1="230" y1="162" x2="228" y2="243" stroke="white" stroke-width="1.5" opacity="0.25"/>
+          <circle cx="430" cy="245" r="38" fill="#1a1a2e"/>
+          <circle cx="430" cy="245" r="28" fill="url(#wheelGrad)"/>
+          <circle cx="430" cy="245" r="14" fill="#0d0d1a"/>
+          <circle cx="430" cy="245" r="7" fill="#8899bb"/>
+          <line x1="430" y1="217" x2="430" y2="273" stroke="#aabbcc" stroke-width="2.5" opacity="0.7"/>
+          <line x1="402" y1="245" x2="458" y2="245" stroke="#aabbcc" stroke-width="2.5" opacity="0.7"/>
+          <line x1="410" y1="225" x2="450" y2="265" stroke="#aabbcc" stroke-width="2" opacity="0.5"/>
+          <line x1="450" y1="225" x2="410" y2="265" stroke="#aabbcc" stroke-width="2" opacity="0.5"/>
+          <circle cx="170" cy="245" r="38" fill="#1a1a2e"/>
+          <circle cx="170" cy="245" r="28" fill="url(#wheelGrad)"/>
+          <circle cx="170" cy="245" r="14" fill="#0d0d1a"/>
+          <circle cx="170" cy="245" r="7" fill="#8899bb"/>
+          <line x1="170" y1="217" x2="170" y2="273" stroke="#aabbcc" stroke-width="2.5" opacity="0.7"/>
+          <line x1="142" y1="245" x2="198" y2="245" stroke="#aabbcc" stroke-width="2.5" opacity="0.7"/>
+          <line x1="150" y1="225" x2="190" y2="265" stroke="#aabbcc" stroke-width="2" opacity="0.5"/>
+          <line x1="190" y1="225" x2="150" y2="265" stroke="#aabbcc" stroke-width="2" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="morph-label" id="morphLabel"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num" data-target="15000">0</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="10">0</div>
+        <div class="stat-label">Years in Service</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="500">0</div>
+        <div class="stat-label">Keys Duplicated</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="100">0</div>
+        <div class="stat-label">% Satisfaction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="section-inner about-grid">
+      <div class="about-text">
+        <div class="section-tag">Who We Are</div>
+        <h2>Premium Care For<br><em>Exceptional Vehicles</em></h2>
+        <p>AutoVault is Malaysia's trusted duplication specialist. Whether you need a spare car key, a copy of your access card, or a replacement gate remote — we get it done fast, accurately, and at a fair price.</p>
+        <p>With years of hands-on experience, our skilled technicians handle all types of keys, smart cards, and remote controls — using the latest equipment to ensure every copy works perfectly.</p>
+        <div class="about-badges">
+          <div class="badge">🔑 Key Specialist</div>
+          <div class="badge">💳 Smart Card Expert</div>
+          <div class="badge">🏠 Remote Pro</div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-card-stack">
+          <div class="acard acard-1">
+            <div class="acard-icon">📋</div>
+            <div class="acard-text">Document Processing<br><small>Fast & Hassle-free</small></div>
+          </div>
+          <div class="acard acard-2">
+            <div class="acard-icon">💳</div>
+            <div class="acard-text">Access &amp; Smart Cards<br><small>RFID &amp; building cards</small></div>
+          </div>
+          <div class="acard acard-3">
+            <div class="acard-icon">⚙️</div>
+            <div class="acard-text">Genuine OEM Parts<br><small>Sourced & certified</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="reveal">
+    <div class="section-inner">
+      <div class="section-tag center">What We Do</div>
+      <h2 class="center">Our Core Services</h2>
+      <p class="section-sub center">Fast, reliable, and professional duplication services — done right the first time.</p>
+      <div class="services-grid">
+        <div class="service-card" data-tilt>
+          <div class="service-icon" style="background: linear-gradient(135deg,#4f8ef7,#6c63ff)">🔑</div>
+          <h3>Car Key Duplication</h3>
+          <p>Lost your car key or need a spare? We duplicate all types of car keys — from basic blade keys to modern transponder and smart remote keys.</p>
+          <ul class="service-list">
+            <li>All car brands supported</li>
+            <li>Transponder & remote keys</li>
+            <li>Key cutting & programming</li>
+            <li>Same-day service available</li>
+          </ul>
+          <a href="#contact" class="service-link">Get a Copy →</a>
+        </div>
+        <div class="service-card featured" data-tilt>
+          <div class="featured-badge">Most Popular</div>
+          <div class="service-icon" style="background: linear-gradient(135deg,#f7934f,#f7514f)">💳</div>
+          <h3>Access Card & Smart Card</h3>
+          <p>Need a duplicate access card or smart card for your office, condo, or building? We copy all types of RFID and smart access cards quickly and accurately.</p>
+          <ul class="service-list">
+            <li>Condo & apartment access cards</li>
+            <li>Office & building smart cards</li>
+            <li>RFID card duplication</li>
+            <li>Fast & reliable copying</li>
+          </ul>
+          <a href="#contact" class="service-link">Duplicate Now →</a>
+        </div>
+        <div class="service-card" data-tilt>
+          <div class="service-icon" style="background: linear-gradient(135deg,#4ff7a0,#4fa8f7)">🏠</div>
+          <h3>Gate Remote Duplication</h3>
+          <p>Lost or broken your house gate remote? We duplicate all types of gate remote controls — compatible with most major gate brands in Malaysia.</p>
+          <ul class="service-list">
+            <li>House & auto gate remotes</li>
+            <li>All major brands supported</li>
+            <li>Rolling code compatible</li>
+            <li>Quick programming on-site</li>
+          </ul>
+          <a href="#contact" class="service-link">Copy Remote →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section id="why" class="reveal">
+    <div class="section-inner">
+      <div class="section-tag center">Why AutoVault</div>
+      <h2 class="center">Built on Trust &amp; Expertise</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">⚡</div>
+          <h4>Fast Turnaround</h4>
+          <p>Same-day service for most duplicate and minor repair jobs. We value your time.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🏅</div>
+          <h4>Certified Team</h4>
+          <p>All technicians are certified and trained. Your vehicle is in expert hands.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💰</div>
+          <h4>Transparent Pricing</h4>
+          <p>No hidden charges. Get a full quote before any work begins. Always fair.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🛡️</div>
+          <h4>Service Warranty</h4>
+          <p>All repairs come with a service warranty. We stand behind our workmanship.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">📍</div>
+          <h4>Easy to Find</h4>
+          <p>Conveniently located with ample parking. Easy access from major roads.</p>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💬</div>
+          <h4>WhatsApp Support</h4>
+          <p>Chat with us anytime on WhatsApp. Quick replies, real help, no bots.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="reveal">
+    <div class="section-inner">
+      <div class="section-tag center">Our Work</div>
+      <h2 class="center gallery-title">Our Services in Action</h2>
+      <p class="section-sub center">A look at the duplication services we provide — fast, accurate, and professional.</p>
+      <canvas id="galleryCanvas" class="gallery-canvas"></canvas>
+      <div class="showcase-grid">
+        <div class="showcase-card" style="--accent:#4f8ef7">
+          <div class="sc-icon-wrap" style="--accent:#4f8ef7"><span class="sc-emoji">🔑</span></div>
+          <h3 class="sc-title">Car Key Cutting &amp; Programming</h3>
+          <p class="sc-desc">All car brands supported. Blade, transponder &amp; smart keys duplicated on the spot.</p>
+          <div class="sc-divider"></div>
+          <div class="sc-tags">
+            <span class="sc-pill" style="--accent:#4f8ef7">Same-day</span>
+            <span class="sc-pill" style="--accent:#4f8ef7">All brands</span>
+            <span class="sc-pill" style="--accent:#4f8ef7">Programming</span>
+          </div>
+        </div>
+        <div class="showcase-card" style="--accent:#a855f7">
+          <div class="sc-icon-wrap" style="--accent:#a855f7"><span class="sc-emoji">🚗</span></div>
+          <h3 class="sc-title">Smart &amp; Remote Keys</h3>
+          <p class="sc-desc">Transponder key cutting and remote programming for modern vehicles.</p>
+          <div class="sc-divider"></div>
+          <div class="sc-tags">
+            <span class="sc-pill" style="--accent:#a855f7">Transponder</span>
+            <span class="sc-pill" style="--accent:#a855f7">Remote</span>
+            <span class="sc-pill" style="--accent:#a855f7">Fast</span>
+          </div>
+        </div>
+        <div class="showcase-card" style="--accent:#06b6d4">
+          <div class="sc-icon-wrap" style="--accent:#06b6d4"><span class="sc-emoji">🏢</span></div>
+          <h3 class="sc-title">Office &amp; Condo Access Cards</h3>
+          <p class="sc-desc">Copy RFID access cards for condos, offices, and apartment buildings.</p>
+          <div class="sc-divider"></div>
+          <div class="sc-tags">
+            <span class="sc-pill" style="--accent:#06b6d4">RFID</span>
+            <span class="sc-pill" style="--accent:#06b6d4">NFC</span>
+            <span class="sc-pill" style="--accent:#06b6d4">Copy</span>
+          </div>
+        </div>
+        <div class="showcase-card" style="--accent:#10b981">
+          <div class="sc-icon-wrap" style="--accent:#10b981"><span class="sc-emoji">🏠</span></div>
+          <h3 class="sc-title">Auto Gate Remotes</h3>
+          <p class="sc-desc">Duplicate house and auto gate remotes. Compatible with all major gate brands in Malaysia.</p>
+          <div class="sc-divider"></div>
+          <div class="sc-tags">
+            <span class="sc-pill" style="--accent:#10b981">All gates</span>
+            <span class="sc-pill" style="--accent:#10b981">Rolling code</span>
+            <span class="sc-pill" style="--accent:#10b981">On-site</span>
+          </div>
+        </div>
+        <div class="showcase-card" style="--accent:#f59e0b">
+          <div class="sc-icon-wrap" style="--accent:#f59e0b"><span class="sc-emoji">💳</span></div>
+          <h3 class="sc-title">RFID Card Copying</h3>
+          <p class="sc-desc">Smart card duplication service for access control systems, fast and accurate.</p>
+          <div class="sc-divider"></div>
+          <div class="sc-tags">
+            <span class="sc-pill" style="--accent:#f59e0b">Smart card</span>
+            <span class="sc-pill" style="--accent:#f59e0b">Accurate</span>
+            <span class="sc-pill" style="--accent:#f59e0b">Certified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="reveal">
+    <div class="section-inner contact-grid">
+      <div class="contact-info">
+        <div class="section-tag">Get In Touch</div>
+        <h2>Let's Get Your<br>Car Sorted Today</h2>
+        <p>Walk in, call us, or drop a WhatsApp message. We respond fast and get things done.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <strong>Call Us</strong>
+              <a href="tel:60195780301">+60 19-578 0301</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div>
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/60195780301" target="_blank">Chat with us instantly</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <strong>Location</strong>
+              <span>Kuala Lumpur, Malaysia</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <strong>Working Hours</strong>
+              <span>Mon – Sat: 9:00 AM – 6:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-map">
+        <div class="map-placeholder">
+          <div class="map-pin">📍</div>
+          <p><strong>AutoVault</strong><br>Kuala Lumpur, Malaysia</p>
+          <a href="https://maps.google.com" target="_blank" class="btn-primary" style="display:inline-block;margin-top:1rem">Open in Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">Auto<span>Vault</span></div>
+        <p>Your trusted car duplicate & workshop specialist in Malaysia. Fast, reliable, certified.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://wa.me/60195780301" aria-label="WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Car Duplicate</a></li>
+          <li><a href="#services">Workshop & Repair</a></li>
+          <li><a href="#services">Car Parts Supply</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#why">Why Choose Us</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:60195780301">+60 19-578 0301</a></li>
+          <li><a href="https://wa.me/60195780301">WhatsApp Us</a></li>
+          <li><span>Mon–Sat: 9am–6pm</span></li>
+          <li><span>Kuala Lumpur, MY</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AutoVault. All rights reserved. | Developed by <strong>Aniqa</strong></p>
+    </div>
+  </footer>
+
+
+  <!-- AI CHATBOT -->
+  <div class="chatbot-btn" id="chatbotBtn" title="Chat with AutoVault Assistant">
+    <div class="chatbot-pulse"></div>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+    </svg>
+  </div>
+
+  <div class="chatbot-window" id="chatbotWindow" data-state="closed">
+    <div class="chatbot-header" id="chatbotHeader">
+      <div class="chatbot-header-left">
+        <div class="chatbot-avatar">AV</div>
+        <div>
+          <div class="chatbot-title">AutoVault Assistant</div>
+          <div class="chatbot-status"><span class="chatbot-dot"></span>Online</div>
+        </div>
+      </div>
+      <div class="chatbot-header-right">
+        <button class="chatbot-icon-btn" id="chatbotMinimize" title="Minimize">—</button>
+        <button class="chatbot-icon-btn" id="chatbotClose" title="Close">✕</button>
+      </div>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <div class="chatbot-messages" id="chatbotMessages"></div>
+      <div class="chatbot-input-row">
+        <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type a message..." maxlength="300"/>
+        <button class="chatbot-send" id="chatbotSend">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="js/three-scene.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/morph-keys.js"></script>
+  <script src="js/gallery-canvas.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>
