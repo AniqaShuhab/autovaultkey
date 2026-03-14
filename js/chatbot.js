@@ -1,6 +1,6 @@
 /**
  * chatbot.js — AutoVault AI Assistant
- * States: closed (hidden, history cleared) | minimized (hidden, history kept) | open (visible)
+ * Direct Claude API. States: closed | minimized | open
  */
 (function () {
 
@@ -15,194 +15,144 @@
 
   const WA_URL = 'https://wa.me/60195780301';
 
-  /* Keywords that suggest conversation end / booking intent */
-  const BOOKING_WORDS = /\b(book|price|cost|how much|appointment|come in|visit|address|location|ready|ok|okay|thanks|thank you|tq|confirm|when|open|directions)\b/i;
+  /* Show WA chip only when user seems ready to book/visit */
+  const BOOKING_WORDS = /\b(book|price|cost|how much|appointment|come in|visit|address|location|ready|ok|okay|thanks|thank you|tq|confirm|when|open|directions|whatsapp|contact|call)\b/i;
 
-  const SYSTEM_PROMPT = `You are AutoVault's friendly and knowledgeable customer assistant for a car key duplication shop in Kuala Lumpur, Malaysia.
+  const SYSTEM = `You are AutoVault's friendly and knowledgeable shop assistant in Kuala Lumpur, Malaysia.
 
-Your job is to have a real, helpful conversation. Answer questions fully and clearly first. Only suggest WhatsApp contact AFTER you have properly helped the customer — not as a first response.
-
-Services & Pricing:
-- Car key duplication (all brands, transponder, smart remote keys) — from RM80
-- Access card & RFID card duplication (condo, office, building) — from RM30
-- Gate remote duplication (all major brands, rolling code supported) — from RM50
-- Same-day service available for most jobs
-- All car brands supported (Proton, Perodua, Toyota, Honda, BMW, Mercedes, etc.)
+AutoVault services & pricing:
+- Car Key Duplication (all brands, transponder, smart remote) — from RM80
+- Access Card & RFID Duplication (condo, office, building) — from RM30
+- Gate Remote Duplication (all brands, rolling code) — from RM50
+- Bag Repairs (handles, zippers, straps, stitching) — from RM25
+- Luggage Repairs (wheels, locks, handles, shell) — from RM35
+- Shoe Repairs (sole, heel, stitching, cleaning) — from RM20
+- Watch Servicing (battery, strap, movement) — from RM15
 
 Business Info:
 - Location: Kuala Lumpur, Malaysia
-- Hours: Monday to Saturday, 9AM–6PM
+- Hours: Monday–Saturday, 9AM–6PM
 - WhatsApp: +60195780301
+- Same-day service for most jobs
 - 10+ years experience, 500+ happy clients
-- Licensed and certified technicians
 
-Conversation rules:
-1. ALWAYS answer the question properly first — give real information, prices, explain the service
-2. Be warm, friendly, and conversational — like a helpful shop assistant
-3. Keep replies concise — 2 to 4 sentences max
-4. Only mention WhatsApp at the natural END of a conversation when the customer seems ready to book or visit — say something like "Whenever you're ready, just WhatsApp us at +60 19-578 0301 to confirm your visit! 😊"
-5. Never say sorry or refer to WhatsApp as your first response to any question
-6. If asked something outside AutoVault services, politely say you can only help with AutoVault's services`;
+Rules:
+1. ALWAYS answer the question with real info and prices first
+2. Be warm, friendly, 2–4 sentences max
+3. Only suggest WhatsApp when customer seems ready to book/visit
+4. Never give WhatsApp as your FIRST response — answer properly first
+5. If asked something unrelated, politely redirect to AutoVault services`;
 
-  let state               = 'closed';
-  let conversationHistory = [];
-  let waitingReply        = false;
+  let state = 'closed';
+  let history = [];
+  let busy = false;
 
-  /* ══════════════════════════════
-     STATE MANAGEMENT
-  ══════════════════════════════ */
-  function setOpen() {
-    state = 'open';
-    win.dataset.state = 'open';
-    setTimeout(() => input.focus(), 80);
-  }
-  function setMinimized() {
-    state = 'minimized';
-    win.dataset.state = 'closed';
-  }
-  function setClosed() {
-    state = 'closed';
-    win.dataset.state = 'closed';
-    conversationHistory = [];
-    messages.innerHTML  = '';
-  }
+  /* ── STATE ── */
+  function setOpen()  { state='open';      win.dataset.state='open';   setTimeout(()=>input.focus(),80); }
+  function setMin()   { state='minimized'; win.dataset.state='closed'; }
+  function setClosed(){ state='closed';    win.dataset.state='closed'; history=[]; messages.innerHTML=''; }
 
   btn.addEventListener('click', () => {
-    if (state === 'open') {
-      setMinimized();
-    } else if (state === 'minimized') {
+    if (state==='open')      setMin();
+    else if (state==='minimized') setOpen();
+    else {
       setOpen();
-    } else {
-      setOpen();
-      setTimeout(() => addBotMessage(
-        "Hi! 👋 I'm AutoVault's assistant. Ask me about our car key duplication, access cards, or gate remotes. How can I help you today?",
-        false
-      ), 300);
+      setTimeout(() => addBot("Hi! 👋 I'm AutoVault's assistant. Ask me about our car key duplication, access cards, gate remotes, bag/shoe/luggage repairs or watch servicing. How can I help?", false), 320);
     }
   });
-
-  minBtn.addEventListener('click', e => { e.stopPropagation(); setMinimized(); });
+  minBtn.addEventListener('click',   e => { e.stopPropagation(); setMin(); });
   closeBtn.addEventListener('click', e => { e.stopPropagation(); setClosed(); });
 
-  /* ══════════════════════════════
-     MESSAGING
-  ══════════════════════════════ */
-  sendBtn.addEventListener('click', sendMessage);
-  input.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-  });
+  /* ── SEND ── */
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();} });
 
-  function sendMessage() {
-    const text = input.value.trim();
-    if (!text || waitingReply) return;
+  function send() {
+    const t = input.value.trim();
+    if (!t || busy) return;
     input.value = '';
-    addUserMessage(text);
-    conversationHistory.push({ role: 'user', content: text });
-    fetchReply(text);
+    addUser(t);
+    history.push({ role:'user', content:t });
+    fetchReply(t);
   }
 
-  function addUserMessage(text) {
+  /* ── RENDER ── */
+  function addUser(text) {
     const el = document.createElement('div');
     el.className = 'cb-msg cb-user';
     el.textContent = text;
     messages.appendChild(el);
-    scrollBottom();
+    scroll();
   }
 
-  /* showWA: only show the WhatsApp chip when booking intent detected */
-  function addBotMessage(text, showWA) {
+  function addBot(text, showWA) {
     const wrap = document.createElement('div');
     wrap.className = 'cb-msg-wrap';
-
-    const avatar = document.createElement('div');
-    avatar.className = 'cb-bot-avatar';
-    avatar.textContent = 'AV';
-
+    const av = document.createElement('div');
+    av.className = 'cb-bot-avatar';
+    av.textContent = 'AV';
     const col = document.createElement('div');
     col.className = 'cb-bot-col';
-
-    const bubble = document.createElement('div');
-    bubble.className = 'cb-msg cb-bot';
-    bubble.textContent = text;
-    col.appendChild(bubble);
-
+    const bbl = document.createElement('div');
+    bbl.className = 'cb-msg cb-bot';
+    bbl.textContent = text;
+    col.appendChild(bbl);
     if (showWA) {
       const chip = document.createElement('a');
-      chip.href = WA_URL;
-      chip.target = '_blank';
+      chip.href = WA_URL; chip.target = '_blank';
       chip.className = 'cb-wa-chip';
       chip.textContent = '💬 Chat on WhatsApp';
       col.appendChild(chip);
     }
-
-    wrap.appendChild(avatar);
-    wrap.appendChild(col);
+    wrap.appendChild(av); wrap.appendChild(col);
     messages.appendChild(wrap);
-    scrollBottom();
+    scroll();
   }
 
   function showTyping() {
-    const wrap = document.createElement('div');
-    wrap.className = 'cb-msg-wrap';
-    wrap.id = 'cbTyping';
-    const avatar = document.createElement('div');
-    avatar.className = 'cb-bot-avatar';
-    avatar.textContent = 'AV';
-    const dots = document.createElement('div');
-    dots.className = 'cb-typing';
-    dots.innerHTML = '<span></span><span></span><span></span>';
-    wrap.appendChild(avatar);
-    wrap.appendChild(dots);
-    messages.appendChild(wrap);
-    scrollBottom();
+    const w = document.createElement('div');
+    w.className = 'cb-msg-wrap'; w.id = 'cbTyping';
+    const av = document.createElement('div');
+    av.className = 'cb-bot-avatar'; av.textContent = 'AV';
+    const d = document.createElement('div');
+    d.className = 'cb-typing';
+    d.innerHTML = '<span></span><span></span><span></span>';
+    w.appendChild(av); w.appendChild(d);
+    messages.appendChild(w); scroll();
   }
+  function hideTyping() { const t=document.getElementById('cbTyping'); if(t) t.remove(); }
+  function scroll() { setTimeout(()=>{ messages.scrollTop=messages.scrollHeight; },60); }
 
-  function removeTyping() {
-    const t = document.getElementById('cbTyping');
-    if (t) t.remove();
-  }
-
-  function scrollBottom() {
-    setTimeout(() => { messages.scrollTop = messages.scrollHeight; }, 60);
-  }
-
-  /* ══════════════════════════════
-     CLAUDE API
-  ══════════════════════════════ */
+  /* ── CLAUDE API ── */
   async function fetchReply(userText) {
-    waitingReply = true;
+    busy = true;
     showTyping();
     try {
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model     : 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system    : SYSTEM_PROMPT,
-          messages  : conversationHistory
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 300,
+          system: SYSTEM,
+          messages: history
         })
       });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      removeTyping();
-
+      hideTyping();
       if (data.content?.[0]?.text) {
         const reply = data.content[0].text;
-        conversationHistory.push({ role: 'assistant', content: reply });
-        /* Show WA chip only if user message contains booking-intent keywords */
-        const showWA = BOOKING_WORDS.test(userText);
-        addBotMessage(reply, showWA);
+        history.push({ role:'assistant', content:reply });
+        addBot(reply, BOOKING_WORDS.test(userText));
       } else {
-        throw new Error('unexpected response shape');
+        throw new Error('No text in response');
       }
     } catch (err) {
-      removeTyping();
-      addBotMessage(
-        "Oops! Something went wrong on my end. Please WhatsApp us directly at +60 19-578 0301 and we'll help you right away! 😊",
-        true
-      );
+      hideTyping();
+      addBot("Oops! Something went wrong. Please WhatsApp us at +60 19-578 0301 and we'll help you right away! 😊", true);
     }
-    waitingReply = false;
+    busy = false;
   }
 
 })();

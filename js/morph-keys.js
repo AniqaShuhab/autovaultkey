@@ -351,6 +351,370 @@
 
   ]; /* end KEYS */
 
+  /* ── Insert Shoe at index 1, Bag at index 3 ── */
+  const SHOE = {
+    brand: 'ALDO',
+    color: '#ec4899',
+    html: `<svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+  <defs>
+    <linearGradient id="s_sole" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1c1917"/><stop offset="100%" stop-color="#44403c"/>
+    </linearGradient>
+    <linearGradient id="s_mid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f9fafb"/><stop offset="100%" stop-color="#d1d5db"/>
+    </linearGradient>
+    <linearGradient id="s_upper1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#831843"/><stop offset="60%" stop-color="#db2777"/><stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="s_upper2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9d174d"/><stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <linearGradient id="s_suede" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fda4af"/><stop offset="100%" stop-color="#fb7185"/>
+    </linearGradient>
+    <filter id="s_drop"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#ec4899" flood-opacity="0.35"/></filter>
+    <filter id="s_inner"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+
+  <!-- OUTSOLE dark rubber -->
+  <path d="M55 238 Q50 236 50 228 L52 218 Q54 210 65 209 L435 206 Q448 206 450 214 L452 224 Q454 236 442 239 Z"
+        fill="url(#s_sole)" filter="url(#s_drop)"/>
+  <!-- Sole tread grooves -->
+  <line x1="80"  y1="209" x2="78"  y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+  <line x1="120" y1="208" x2="118" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+  <line x1="160" y1="207" x2="158" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+  <line x1="200" y1="207" x2="198" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+  <line x1="240" y1="207" x2="238" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+  <line x1="280" y1="207" x2="278" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+  <line x1="320" y1="207" x2="319" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+  <line x1="360" y1="207" x2="360" y2="237" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+  <line x1="400" y1="207" x2="402" y2="235" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
+
+  <!-- MIDSOLE white chunky -->
+  <path d="M58 210 Q54 208 54 200 L56 190 Q58 183 68 182 L428 180 Q440 180 442 188 L444 197 Q446 208 434 210 Z"
+        fill="url(#s_mid)"/>
+  <!-- Midsole pink accent stripe -->
+  <path d="M60 192 L430 190 L432 196 L62 198 Z" fill="#fda4af" opacity="0.5"/>
+  <!-- Midsole highlight -->
+  <path d="M62 182 L426 180 L428 185 L64 187 Z" fill="white" opacity="0.7"/>
+
+  <!-- MAIN UPPER BODY (sneaker shape) -->
+  <path d="M62 182 Q60 148 88 128 Q116 108 170 100 L310 96 Q352 94 388 108 Q420 122 432 152 L435 182 Z"
+        fill="url(#s_upper1)"/>
+
+  <!-- HEEL COUNTER -->
+  <path d="M62 182 Q60 148 88 128 Q104 118 126 112 L126 182 Z"
+        fill="url(#s_upper2)" opacity="0.9"/>
+  <!-- Heel gusset seam -->
+  <line x1="126" y1="112" x2="126" y2="182" stroke="white" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.35"/>
+
+  <!-- SUEDE COLLAR PANEL (ankle opening) -->
+  <path d="M62 182 Q65 166 86 158 L126 153 L126 182 Z"
+        fill="url(#s_suede)" opacity="0.85"/>
+  <!-- Collar stitching -->
+  <path d="M70 166 Q88 156 118 152" fill="none" stroke="white" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.55"/>
+
+  <!-- TOE BOX perforations + overlay -->
+  <path d="M308 96 Q352 94 388 108 Q418 120 430 150 L432 182 L362 182 L358 98 Z"
+        fill="#be185d" opacity="0.7"/>
+  <!-- Toe perforations -->
+  <circle cx="380" cy="120" r="3" fill="#9d174d" opacity="0.6"/>
+  <circle cx="395" cy="130" r="3" fill="#9d174d" opacity="0.6"/>
+  <circle cx="405" cy="142" r="3" fill="#9d174d" opacity="0.6"/>
+  <circle cx="370" cy="114" r="2.5" fill="#9d174d" opacity="0.6"/>
+  <circle cx="388" cy="110" r="2.5" fill="#9d174d" opacity="0.6"/>
+  <!-- Toe stitch -->
+  <path d="M362 102 Q390 100 416 118" fill="none" stroke="white" stroke-width="1.2" stroke-dasharray="3 2.5" opacity="0.35"/>
+
+  <!-- TONGUE -->
+  <path d="M172 100 L180 94 L265 92 L273 98 L268 182 L177 182 Z"
+        fill="#9d174d" opacity="0.9"/>
+  <!-- Tongue label -->
+  <rect x="200" y="128" width="42" height="28" rx="5" fill="white" opacity="0.12"/>
+  <text x="221" y="146" text-anchor="middle" font-family="'Arial Narrow',Arial,sans-serif"
+        font-size="9" font-weight="900" fill="white" opacity="0.7" letter-spacing="1.5">ALDO</text>
+  <line x1="200" y1="152" x2="242" y2="152" stroke="white" stroke-width="0.8" opacity="0.3"/>
+  <text x="221" y="164" text-anchor="middle" font-family="Arial,sans-serif"
+        font-size="7" fill="white" opacity="0.4" letter-spacing="0.5">since 1972</text>
+
+  <!-- LACES — 5 pairs eyelets -->
+  <circle cx="181" cy="114" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="181" cy="130" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="181" cy="146" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="181" cy="162" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="181" cy="176" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="265" cy="112" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="265" cy="128" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="265" cy="144" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="265" cy="160" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <circle cx="265" cy="174" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
+  <!-- Laces crossing -->
+  <line x1="181" y1="114" x2="265" y2="112" stroke="white" stroke-width="2" opacity="0.9"/>
+  <line x1="181" y1="130" x2="265" y2="128" stroke="white" stroke-width="2" opacity="0.9"/>
+  <line x1="181" y1="146" x2="265" y2="144" stroke="white" stroke-width="2" opacity="0.9"/>
+  <line x1="181" y1="162" x2="265" y2="160" stroke="white" stroke-width="2" opacity="0.9"/>
+  <line x1="181" y1="176" x2="265" y2="174" stroke="white" stroke-width="2" opacity="0.9"/>
+  <!-- X diagonals (lace weave) -->
+  <line x1="181" y1="114" x2="265" y2="128" stroke="white" stroke-width="1" opacity="0.25"/>
+  <line x1="265" y1="112" x2="181" y2="130" stroke="white" stroke-width="1" opacity="0.25"/>
+  <line x1="181" y1="130" x2="265" y2="144" stroke="white" stroke-width="1" opacity="0.25"/>
+  <line x1="265" y1="128" x2="181" y2="146" stroke="white" stroke-width="1" opacity="0.25"/>
+
+  <!-- BRAND SWOOSH (Gucci-style side stripe) -->
+  <path d="M132 172 Q185 152 270 144 Q304 142 328 146 Q308 159 265 163 Q210 168 148 180 Z"
+        fill="white" opacity="0.85"/>
+  <!-- Double stripe accent -->
+  <path d="M136 162 Q195 144 275 138 Q300 136 322 139 Q305 145 268 148 Q212 153 144 164 Z"
+        fill="white" opacity="0.25"/>
+
+  <!-- Upper shine -->
+  <path d="M150 112 Q210 102 295 98 Q315 97 332 99 L330 111 Q312 110 294 112 Q210 116 152 126 Z"
+        fill="white" opacity="0.1"/>
+
+  <!-- Floor shadow glow -->
+  <ellipse cx="250" cy="252" rx="185" ry="10" fill="#ec4899" opacity="0.18"/>
+</svg>`
+  };
+
+  const BAG = {
+    brand: 'Gucci',
+    color: '#a16207',
+    html: `<svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+  <defs>
+    <linearGradient id="b_body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1917"/><stop offset="60%" stop-color="#292524"/><stop offset="100%" stop-color="#1c1917"/>
+    </linearGradient>
+    <linearGradient id="b_face" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3d3530"/><stop offset="100%" stop-color="#1c1917"/>
+    </linearGradient>
+    <linearGradient id="b_green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/><stop offset="100%" stop-color="#065f46"/>
+    </linearGradient>
+    <linearGradient id="b_gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ca8a04"/><stop offset="40%" stop-color="#eab308"/><stop offset="100%" stop-color="#a16207"/>
+    </linearGradient>
+    <linearGradient id="b_chain_l" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/><stop offset="50%" stop-color="#ca8a04"/><stop offset="100%" stop-color="#fef08a"/>
+    </linearGradient>
+    <pattern id="b_quilt" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 10 Q5 5 10 0 Q15 5 20 10 Q15 15 10 20 Q5 15 0 10 Z" fill="none" stroke="#292524" stroke-width="1"/>
+    </pattern>
+    <filter id="b_drop"><feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000" flood-opacity="0.5"/></filter>
+    <filter id="b_glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <!-- ─── CHAIN STRAP (across top) ─── -->
+  <!-- Chain left segment -->
+  <path d="M72 85 Q68 65 80 55 Q95 48 112 58 Q125 65 128 85" fill="none" stroke="url(#b_chain_l)" stroke-width="6" stroke-linecap="round"/>
+  <!-- Chain links detail left -->
+  <ellipse cx="90" cy="56" rx="9" ry="5" fill="none" stroke="url(#b_gold)" stroke-width="2.5" transform="rotate(-30,90,56)"/>
+  <ellipse cx="106" cy="52" rx="9" ry="5" fill="none" stroke="url(#b_gold)" stroke-width="2.5" transform="rotate(-15,106,52)"/>
+
+  <!-- Chain right segment -->
+  <path d="M372 85 Q375 65 390 55 Q405 47 420 58 Q432 67 428 85" fill="none" stroke="url(#b_chain_l)" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="392" cy="54" rx="9" ry="5" fill="none" stroke="url(#b_gold)" stroke-width="2.5" transform="rotate(15,392,54)"/>
+  <ellipse cx="410" cy="52" rx="9" ry="5" fill="none" stroke="url(#b_gold)" stroke-width="2.5" transform="rotate(30,410,52)"/>
+
+  <!-- Chain ring connectors -->
+  <circle cx="72" cy="88" r="10" fill="url(#b_gold)"/>
+  <circle cx="72" cy="88" r="6" fill="#92400e"/>
+  <circle cx="128" cy="88" r="10" fill="url(#b_gold)"/>
+  <circle cx="128" cy="88" r="6" fill="#92400e"/>
+  <circle cx="372" cy="88" r="10" fill="url(#b_gold)"/>
+  <circle cx="372" cy="88" r="6" fill="#92400e"/>
+  <circle cx="428" cy="88" r="10" fill="url(#b_gold)"/>
+  <circle cx="428" cy="88" r="6" fill="#92400e"/>
+
+  <!-- ─── BAG BODY (dark structured) ─── -->
+  <rect x="62" y="84" width="376" height="176" rx="12" fill="url(#b_body)" filter="url(#b_drop)"/>
+  <!-- Quilted texture overlay -->
+  <rect x="62" y="84" width="376" height="176" rx="12" fill="url(#b_quilt)" opacity="0.4"/>
+  <!-- Face panel slight lighter -->
+  <rect x="72" y="92" width="356" height="158" rx="9" fill="url(#b_face)" opacity="0.7"/>
+
+  <!-- ─── OUTER STITCHING ─── -->
+  <rect x="78" y="98" width="344" height="146" rx="7" fill="none"
+        stroke="url(#b_gold)" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.45"/>
+
+  <!-- ─── GOLD HARDWARE CLASP ─── -->
+  <!-- Clasp plate -->
+  <rect x="200" y="80" width="100" height="32" rx="7" fill="url(#b_gold)"/>
+  <rect x="202" y="82" width="96" height="28" rx="6" fill="none" stroke="#92400e" stroke-width="1.2"/>
+  <!-- Lock body -->
+  <rect x="218" y="85" width="64" height="22" rx="5" fill="#ca8a04"/>
+  <!-- Lock detail -->
+  <rect x="228" y="89" width="44" height="13" rx="3" fill="url(#b_gold)"/>
+  <circle cx="250" cy="95" r="5" fill="#7c3e04" opacity="0.7"/>
+  <circle cx="250" cy="95" r="2.5" fill="#ca8a04"/>
+  <!-- Clasp hinge -->
+  <path d="M230 102 Q250 108 270 102" fill="none" stroke="url(#b_gold)" stroke-width="2" opacity="0.7"/>
+
+  <!-- ─── GUCCI-STYLE LOGO PLATE ─── -->
+  <!-- Center logo plate dark green -->
+  <rect x="182" y="136" width="136" height="52" rx="8" fill="url(#b_green)"/>
+  <rect x="184" y="138" width="132" height="48" rx="7" fill="none" stroke="url(#b_gold)" stroke-width="1.2"/>
+  <!-- Interlocked GG-style text -->
+  <text x="250" y="168" text-anchor="middle" font-family="Georgia,'Times New Roman',serif"
+        font-size="20" font-weight="bold" fill="url(#b_gold)" letter-spacing="4" filter="url(#b_glow)">GUCCI</text>
+  <line x1="194" y1="157" x2="306" y2="157" stroke="url(#b_gold)" stroke-width="0.8" opacity="0.4"/>
+  <line x1="194" y1="175" x2="306" y2="175" stroke="url(#b_gold)" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- ─── VERTICAL CENTER SEAM ─── -->
+  <line x1="250" y1="94" x2="250" y2="130" stroke="url(#b_gold)" stroke-width="1" stroke-dasharray="3 2.5" opacity="0.3"/>
+  <line x1="250" y1="198" x2="250" y2="252" stroke="url(#b_gold)" stroke-width="1" stroke-dasharray="3 2.5" opacity="0.3"/>
+
+  <!-- ─── CORNER STUDS ─── -->
+  <circle cx="82"  cy="94"  r="5" fill="url(#b_gold)"/>
+  <circle cx="418" cy="94"  r="5" fill="url(#b_gold)"/>
+  <circle cx="82"  cy="250" r="5" fill="url(#b_gold)"/>
+  <circle cx="418" cy="250" r="5" fill="url(#b_gold)"/>
+
+  <!-- Bottom feet hardware -->
+  <circle cx="130" cy="255" r="6" fill="url(#b_gold)"/><circle cx="130" cy="255" r="3" fill="#92400e"/>
+  <circle cx="250" cy="258" r="6" fill="url(#b_gold)"/><circle cx="250" cy="258" r="3" fill="#92400e"/>
+  <circle cx="370" cy="255" r="6" fill="url(#b_gold)"/><circle cx="370" cy="255" r="3" fill="#92400e"/>
+
+  <!-- Floor shadow -->
+  <ellipse cx="250" cy="270" rx="195" ry="9" fill="#ca8a04" opacity="0.18"/>
+</svg>`
+  };
+
+  /* Also add a WATCH morph item */
+  const WATCH = {
+    brand: 'Rolex',
+    color: '#14b8a6',
+    html: `<svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+  <defs>
+    <linearGradient id="w_case" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/><stop offset="40%" stop-color="#f8fafc"/><stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="w_dial" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/><stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="w_strap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#134e4a"/><stop offset="50%" stop-color="#0f766e"/><stop offset="100%" stop-color="#134e4a"/>
+    </linearGradient>
+    <linearGradient id="w_teal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6"/><stop offset="100%" stop-color="#0d9488"/>
+    </linearGradient>
+    <linearGradient id="w_gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="w_drop"><feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#14b8a6" flood-opacity="0.35"/></filter>
+  </defs>
+
+  <!-- ─── TOP STRAP ─── -->
+  <rect x="210" y="14" width="80" height="88" rx="10" fill="url(#w_strap)"/>
+  <rect x="212" y="16" width="76" height="84" rx="9" fill="none" stroke="#0f766e" stroke-width="1"/>
+  <!-- Strap holes -->
+  <circle cx="250" cy="38" r="3" fill="#0a4744"/>
+  <circle cx="250" cy="54" r="3" fill="#0a4744"/>
+  <circle cx="250" cy="70" r="3" fill="#0a4744"/>
+  <circle cx="250" cy="86" r="3" fill="#0a4744"/>
+  <!-- Strap stitching -->
+  <line x1="220" y1="20" x2="220" y2="96" stroke="#2dd4bf" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+  <line x1="280" y1="20" x2="280" y2="96" stroke="#2dd4bf" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+
+  <!-- ─── BOTTOM STRAP ─── -->
+  <rect x="210" y="178" width="80" height="88" rx="10" fill="url(#w_strap)"/>
+  <rect x="212" y="180" width="76" height="84" rx="9" fill="none" stroke="#0f766e" stroke-width="1"/>
+  <circle cx="250" cy="196" r="3" fill="#0a4744"/>
+  <circle cx="250" cy="212" r="3" fill="#0a4744"/>
+  <circle cx="250" cy="228" r="3" fill="#0a4744"/>
+  <circle cx="250" cy="244" r="3" fill="#0a4744"/>
+  <line x1="220" y1="182" x2="220" y2="262" stroke="#2dd4bf" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+  <line x1="280" y1="182" x2="280" y2="262" stroke="#2dd4bf" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+  <!-- Buckle -->
+  <rect x="228" y="248" width="44" height="16" rx="5" fill="url(#w_gold)"/>
+  <rect x="246" y="244" width="8" height="24" rx="3" fill="url(#w_gold)"/>
+  <rect x="230" y="250" width="40" height="12" rx="4" fill="none" stroke="#92400e" stroke-width="1"/>
+
+  <!-- ─── CASE BODY ─── -->
+  <circle cx="250" cy="140" r="90" fill="url(#w_case)" filter="url(#w_drop)"/>
+  <!-- Case side lug lines -->
+  <line x1="164" y1="128" x2="156" y2="128" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
+  <line x1="164" y1="152" x2="156" y2="152" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
+  <line x1="336" y1="128" x2="344" y2="128" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
+  <line x1="336" y1="152" x2="344" y2="152" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
+  <!-- Crown -->
+  <rect x="338" y="134" width="18" height="12" rx="4" fill="url(#w_case)"/>
+  <rect x="340" y="136" width="14" height="8" rx="3" fill="none" stroke="#94a3b8" stroke-width="1"/>
+
+  <!-- Case shine ring -->
+  <circle cx="250" cy="140" r="88" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3"/>
+  <circle cx="250" cy="140" r="86" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1"/>
+
+  <!-- ─── DIAL ─── -->
+  <circle cx="250" cy="140" r="76" fill="url(#w_dial)"/>
+  <!-- Dial bezel ring teal -->
+  <circle cx="250" cy="140" r="76" fill="none" stroke="url(#w_teal)" stroke-width="4"/>
+  <!-- Minute track -->
+  <circle cx="250" cy="140" r="70" fill="none" stroke="rgba(20,184,166,0.25)" stroke-width="1" stroke-dasharray="2 8"/>
+
+  <!-- ─── HOUR MARKERS ─── -->
+  <!-- 12 -->
+  <rect x="246" y="72" width="8" height="16" rx="2" fill="#14b8a6"/>
+  <!-- 3 -->
+  <rect x="312" y="136" width="16" height="8" rx="2" fill="url(#w_gold)"/>
+  <!-- 6 -->
+  <rect x="246" y="192" width="8" height="16" rx="2" fill="#14b8a6"/>
+  <!-- 9 -->
+  <rect x="172" y="136" width="16" height="8" rx="2" fill="url(#w_gold)"/>
+  <!-- Minor markers at other positions -->
+  <rect x="287" y="77"  width="5" height="10" rx="1.5" fill="#334155" transform="rotate(30,289,82)"/>
+  <rect x="315" y="96"  width="5" height="10" rx="1.5" fill="#334155" transform="rotate(60,318,101)"/>
+  <rect x="316" y="166" width="5" height="10" rx="1.5" fill="#334155" transform="rotate(120,319,171)"/>
+  <rect x="290" y="194" width="5" height="10" rx="1.5" fill="#334155" transform="rotate(150,293,199)"/>
+  <rect x="211" y="194" width="5" height="10" rx="1.5" fill="#334155" transform="rotate(210,214,199)"/>
+  <rect x="181" y="168" width="5" height="10" rx="1.5" fill="#334155" transform="rotate(240,184,173)"/>
+  <rect x="181" y="96"  width="5" height="10" rx="1.5" fill="#334155" transform="rotate(300,184,101)"/>
+  <rect x="209" y="77"  width="5" height="10" rx="1.5" fill="#334155" transform="rotate(330,212,82)"/>
+
+  <!-- ─── SUB-DIAL (date window) ─── -->
+  <rect x="280" y="136" width="24" height="16" rx="3" fill="#1e293b"/>
+  <rect x="282" y="138" width="20" height="12" rx="2" fill="#0f172a"/>
+  <text x="292" y="148" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#14b8a6" font-weight="bold">14</text>
+
+  <!-- ─── ROLEX-STYLE BRAND ─── -->
+  <text x="250" y="118" text-anchor="middle" font-family="Georgia,serif"
+        font-size="11" font-weight="bold" fill="url(#w_gold)" letter-spacing="2" opacity="0.9">ROLEX</text>
+  <text x="250" y="132" text-anchor="middle" font-family="Georgia,serif"
+        font-size="7.5" font-weight="400" fill="rgba(255,255,255,0.45)" letter-spacing="1.5">OYSTER PERPETUAL</text>
+
+  <!-- ─── HANDS ─── -->
+  <!-- Hour hand (pointing ~10 o'clock) -->
+  <line x1="250" y1="140" x2="218" y2="104" stroke="#f8fafc" stroke-width="5" stroke-linecap="round"/>
+  <line x1="250" y1="140" x2="218" y2="104" stroke="url(#w_teal)" stroke-width="2" stroke-linecap="round"/>
+  <!-- Minute hand (pointing ~2 o'clock) -->
+  <line x1="250" y1="140" x2="290" y2="88" stroke="#f8fafc" stroke-width="4" stroke-linecap="round"/>
+  <line x1="250" y1="140" x2="290" y2="88" stroke="url(#w_teal)" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Seconds hand (red accent) -->
+  <line x1="250" y1="140" x2="266" y2="100" stroke="#f43f5e" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+  <line x1="250" y1="140" x2="240" y2="165" stroke="#f43f5e" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+  <!-- Centre cap -->
+  <circle cx="250" cy="140" r="6" fill="url(#w_gold)"/>
+  <circle cx="250" cy="140" r="3" fill="#f8fafc"/>
+
+  <!-- Floor shadow -->
+  <ellipse cx="250" cy="270" rx="95" ry="7" fill="#14b8a6" opacity="0.2"/>
+</svg>`
+  };
+
+  /* Requested cycle order: Bugatti → Shoe → Gucci Bag → Lamborghini → Rolex Watch → Audi → repeat
+     KEYS base array = [Bugatti(0), Audi(1), Lamborghini(2), Rolls-Royce(3)]
+     Build final array manually in correct order:                              */
+  const ORDERED = [
+    KEYS[0],   /* Bugatti */
+    SHOE,      /* ALDO Shoe */
+    BAG,       /* Gucci Bag */
+    KEYS[2],   /* Lamborghini */
+    WATCH,     /* Rolex Watch */
+    KEYS[1],   /* Audi */
+  ];
+  KEYS.length = 0;
+  ORDERED.forEach(k => KEYS.push(k));
+  /* Final cycle: Car→Bugatti→Car→Shoe→Car→GucciBag→Car→Lamborghini→Car→Watch→Car→Audi→repeat */
+
   /* ══════════════════════════
      ANIMATION ENGINE
   ══════════════════════════ */
