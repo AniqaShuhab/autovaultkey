@@ -355,126 +355,36 @@
   const SHOE = {
     brand: 'ALDO',
     color: '#ec4899',
-    html: `<svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
-  <defs>
-    <linearGradient id="s_sole" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#1c1917"/><stop offset="100%" stop-color="#44403c"/>
-    </linearGradient>
-    <linearGradient id="s_mid" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#f9fafb"/><stop offset="100%" stop-color="#d1d5db"/>
-    </linearGradient>
-    <linearGradient id="s_upper1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#831843"/><stop offset="60%" stop-color="#db2777"/><stop offset="100%" stop-color="#ec4899"/>
-    </linearGradient>
-    <linearGradient id="s_upper2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#9d174d"/><stop offset="100%" stop-color="#be185d"/>
-    </linearGradient>
-    <linearGradient id="s_suede" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fda4af"/><stop offset="100%" stop-color="#fb7185"/>
-    </linearGradient>
-    <filter id="s_drop"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#ec4899" flood-opacity="0.35"/></filter>
-    <filter id="s_inner"><feGaussianBlur stdDeviation="2"/></filter>
-  </defs>
-
-  <!-- OUTSOLE dark rubber -->
-  <path d="M55 238 Q50 236 50 228 L52 218 Q54 210 65 209 L435 206 Q448 206 450 214 L452 224 Q454 236 442 239 Z"
-        fill="url(#s_sole)" filter="url(#s_drop)"/>
-  <!-- Sole tread grooves -->
-  <line x1="80"  y1="209" x2="78"  y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-  <line x1="120" y1="208" x2="118" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-  <line x1="160" y1="207" x2="158" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-  <line x1="200" y1="207" x2="198" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-  <line x1="240" y1="207" x2="238" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-  <line x1="280" y1="207" x2="278" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-  <line x1="320" y1="207" x2="319" y2="238" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-  <line x1="360" y1="207" x2="360" y2="237" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-  <line x1="400" y1="207" x2="402" y2="235" stroke="#0c0a09" stroke-width="2" opacity="0.5"/>
-
-  <!-- MIDSOLE white chunky -->
-  <path d="M58 210 Q54 208 54 200 L56 190 Q58 183 68 182 L428 180 Q440 180 442 188 L444 197 Q446 208 434 210 Z"
-        fill="url(#s_mid)"/>
-  <!-- Midsole pink accent stripe -->
-  <path d="M60 192 L430 190 L432 196 L62 198 Z" fill="#fda4af" opacity="0.5"/>
-  <!-- Midsole highlight -->
-  <path d="M62 182 L426 180 L428 185 L64 187 Z" fill="white" opacity="0.7"/>
-
-  <!-- MAIN UPPER BODY (sneaker shape) -->
-  <path d="M62 182 Q60 148 88 128 Q116 108 170 100 L310 96 Q352 94 388 108 Q420 122 432 152 L435 182 Z"
-        fill="url(#s_upper1)"/>
-
-  <!-- HEEL COUNTER -->
-  <path d="M62 182 Q60 148 88 128 Q104 118 126 112 L126 182 Z"
-        fill="url(#s_upper2)" opacity="0.9"/>
-  <!-- Heel gusset seam -->
-  <line x1="126" y1="112" x2="126" y2="182" stroke="white" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.35"/>
-
-  <!-- SUEDE COLLAR PANEL (ankle opening) -->
-  <path d="M62 182 Q65 166 86 158 L126 153 L126 182 Z"
-        fill="url(#s_suede)" opacity="0.85"/>
-  <!-- Collar stitching -->
-  <path d="M70 166 Q88 156 118 152" fill="none" stroke="white" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.55"/>
-
-  <!-- TOE BOX perforations + overlay -->
-  <path d="M308 96 Q352 94 388 108 Q418 120 430 150 L432 182 L362 182 L358 98 Z"
-        fill="#be185d" opacity="0.7"/>
-  <!-- Toe perforations -->
-  <circle cx="380" cy="120" r="3" fill="#9d174d" opacity="0.6"/>
-  <circle cx="395" cy="130" r="3" fill="#9d174d" opacity="0.6"/>
-  <circle cx="405" cy="142" r="3" fill="#9d174d" opacity="0.6"/>
-  <circle cx="370" cy="114" r="2.5" fill="#9d174d" opacity="0.6"/>
-  <circle cx="388" cy="110" r="2.5" fill="#9d174d" opacity="0.6"/>
-  <!-- Toe stitch -->
-  <path d="M362 102 Q390 100 416 118" fill="none" stroke="white" stroke-width="1.2" stroke-dasharray="3 2.5" opacity="0.35"/>
-
-  <!-- TONGUE -->
-  <path d="M172 100 L180 94 L265 92 L273 98 L268 182 L177 182 Z"
-        fill="#9d174d" opacity="0.9"/>
-  <!-- Tongue label -->
-  <rect x="200" y="128" width="42" height="28" rx="5" fill="white" opacity="0.12"/>
-  <text x="221" y="146" text-anchor="middle" font-family="'Arial Narrow',Arial,sans-serif"
-        font-size="9" font-weight="900" fill="white" opacity="0.7" letter-spacing="1.5">ALDO</text>
-  <line x1="200" y1="152" x2="242" y2="152" stroke="white" stroke-width="0.8" opacity="0.3"/>
-  <text x="221" y="164" text-anchor="middle" font-family="Arial,sans-serif"
-        font-size="7" fill="white" opacity="0.4" letter-spacing="0.5">since 1972</text>
-
-  <!-- LACES — 5 pairs eyelets -->
-  <circle cx="181" cy="114" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="181" cy="130" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="181" cy="146" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="181" cy="162" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="181" cy="176" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="265" cy="112" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="265" cy="128" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="265" cy="144" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="265" cy="160" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <circle cx="265" cy="174" r="3.5" fill="#831843" stroke="white" stroke-width="1.5"/>
-  <!-- Laces crossing -->
-  <line x1="181" y1="114" x2="265" y2="112" stroke="white" stroke-width="2" opacity="0.9"/>
-  <line x1="181" y1="130" x2="265" y2="128" stroke="white" stroke-width="2" opacity="0.9"/>
-  <line x1="181" y1="146" x2="265" y2="144" stroke="white" stroke-width="2" opacity="0.9"/>
-  <line x1="181" y1="162" x2="265" y2="160" stroke="white" stroke-width="2" opacity="0.9"/>
-  <line x1="181" y1="176" x2="265" y2="174" stroke="white" stroke-width="2" opacity="0.9"/>
-  <!-- X diagonals (lace weave) -->
-  <line x1="181" y1="114" x2="265" y2="128" stroke="white" stroke-width="1" opacity="0.25"/>
-  <line x1="265" y1="112" x2="181" y2="130" stroke="white" stroke-width="1" opacity="0.25"/>
-  <line x1="181" y1="130" x2="265" y2="144" stroke="white" stroke-width="1" opacity="0.25"/>
-  <line x1="265" y1="128" x2="181" y2="146" stroke="white" stroke-width="1" opacity="0.25"/>
-
-  <!-- BRAND SWOOSH (Gucci-style side stripe) -->
-  <path d="M132 172 Q185 152 270 144 Q304 142 328 146 Q308 159 265 163 Q210 168 148 180 Z"
-        fill="white" opacity="0.85"/>
-  <!-- Double stripe accent -->
-  <path d="M136 162 Q195 144 275 138 Q300 136 322 139 Q305 145 268 148 Q212 153 144 164 Z"
-        fill="white" opacity="0.25"/>
-
-  <!-- Upper shine -->
-  <path d="M150 112 Q210 102 295 98 Q315 97 332 99 L330 111 Q312 110 294 112 Q210 116 152 126 Z"
-        fill="white" opacity="0.1"/>
-
-  <!-- Floor shadow glow -->
-  <ellipse cx="250" cy="252" rx="185" ry="10" fill="#ec4899" opacity="0.18"/>
-</svg>`
+    html: `<div style="width:100%;max-width:520px;height:290px;margin:auto;position:relative;display:flex;align-items:center;justify-content:center;">
+  <!-- Pink radial glow bg -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%, rgba(236,72,153,0.14) 0%, transparent 68%);border-radius:20px;pointer-events:none;"></div>
+  <!-- Main hero shoe photo - teal luxury heel flat-lay -->
+  <div style="
+    width:290px;height:260px;
+    background-image:url('assets/images/heels-luxury.png');
+    background-size:cover;background-position:center top;
+    border-radius:18px;
+    box-shadow:0 16px 48px rgba(236,72,153,0.3),0 4px 16px rgba(0,0,0,0.18);
+    border:2.5px solid rgba(255,255,255,0.85);
+    position:relative;z-index:2;
+  "></div>
+  <!-- Back photo - ALDO shoes display, offset right -->
+  <div style="
+    position:absolute;right:20px;top:24px;
+    width:175px;height:200px;
+    background-image:url('assets/images/shoes-product.png');
+    background-size:cover;background-position:center;
+    border-radius:14px;
+    box-shadow:0 8px 28px rgba(0,0,0,0.22);
+    border:2.5px solid rgba(255,255,255,0.75);
+    transform:rotate(7deg);
+    z-index:1;
+  "></div>
+  <!-- Floor glow -->
+  <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:340px;height:18px;background:radial-gradient(ellipse,rgba(236,72,153,0.22),transparent 70%);border-radius:50%;"></div>
+</div>`
   };
+
 
   const BAG = {
     brand: 'Gucci',
