@@ -368,16 +368,17 @@ h2 em { font-style: normal; background: var(--grad); -webkit-background-clip: te
   align-items: center;
 }
 .about-text p { color: var(--text-light); line-height: 1.8; margin-bottom: 1rem; }
-.about-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+.about-badges { display: flex; gap: 0.6rem; flex-wrap: nowrap; margin-top: 1.5rem; align-items: center; }
 .badge {
   background: white;
   border: 1px solid rgba(108,99,255,0.15);
   color: var(--text);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 50px;
   box-shadow: 0 2px 8px rgba(108,99,255,0.07);
+  white-space: nowrap;
 }
 
 .about-card-stack {
