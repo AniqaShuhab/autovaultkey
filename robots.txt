@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://autovault.com.my/sitemap.xml
+
+# Block irrelevant files
+Disallow: /chatbot-server.py
+Disallow: /requirements.txt
